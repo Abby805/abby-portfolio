@@ -1,9 +1,10 @@
 import './styles/global.css'
 import type { Metadata } from 'next'
-import { Navbar } from './components/nav'
+import Header from './components/Header'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
-import Footer from './components/footer'
+import Footer from './components/Footer'
+import Row from './components/layout/Row'
 import { baseUrl } from './sitemap'
 
 export const metadata: Metadata = {
@@ -45,13 +46,15 @@ export default function RootLayout({
     >
       <head></head> 
       <body>
-        <main>
-          <Navbar />
-          {children}
+          <Header />
+          <main>
+            <Row color="blue">
+              {children}
+            </Row>
+          </main>
           <Footer />
           <Analytics />
           <SpeedInsights />
-        </main>
       </body>
     </html>
   )

@@ -1,29 +1,51 @@
-export default function Footer() {
+import Link from 'next/link'
+
+import Row from './layout/Row';
+import footerStyles from '../styles/footer.module.css'
+
+type FooterLink = {
+  href: string
+  name: string
+  rel?: string
+}
+
+const footerItems = [
+  {
+    href: '/rss',
+    name: 'RSS',
+    rel: 'noopener noreferrer',
+  },
+  {
+    href: 'https://www.linkedin.com/in/abigailmilberg/',
+    name: 'LinkedIn',
+    rel: 'noopener noreferrer',
+  }
+]
+
+const Footer = () => {
   return (
-    <footer>
-      <ul>
-        <li>
-          <a
-            rel="noopener noreferrer"
-            target="_blank"
-            href="/rss"
-          >
-            <p>rss</p>
-          </a>
-        </li>
-        <li>
-          <a
-            rel="noopener noreferrer"
-            target="_blank"
-            href="https://github.com/vercel/next.js"
-          >
-            <p>github</p>
-          </a>
-        </li>
-      </ul>
-      <p>
-        © {new Date().getFullYear()} Abby Milberg
-      </p>
-    </footer>
+    <Row>
+      <footer className={footerStyles.footer}>
+        <ul>
+          {footerItems.map((item: FooterLink) => {
+            return (
+              <li key={`footer-${item.href}`}>
+                <Link
+                  href={item.href}
+                  rel={item.rel || ''}
+                >
+                  {item.name}
+                </Link>
+              </li>
+            )
+          })}
+        </ul>
+        <p>
+          © {new Date().getFullYear()} Abby Milberg
+        </p>
+      </footer>
+    </Row>
   )
 }
+
+export default Footer;
