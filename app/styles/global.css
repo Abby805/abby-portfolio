@@ -1,0 +1,122 @@
+/* 
+  Global styles 
+*/
+
+@import url('//fonts.googleapis.com/css?family=Crimson+Text|Mukta:300,700&display=swap');
+
+:root {
+  --c-gray-dk: #222;
+  --c-white: #fff;
+  --c-blue: #369fb9;
+
+  --font-serif: 'Crimson Text', serif;
+  --font-sans: 'Mukta', sans-serif;
+
+  --font-weight-normal: 400; /* The only serif weight */
+  --font-weight-light: 300; /* 'Normal' for sans */
+  --font-weight-bold: 700; /* Sans only */
+
+  --stage-max:  120rem;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  /* The old set-it-to-10px-so-I-can-calc-rems-in-my-head trick */
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.8rem;
+  line-height: 1.6;
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-light);
+  background: var(--c-gray-dk);
+  color: var(--c-white);
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+p {
+  margin-bottom: 1.8rem;
+  text-wrap: pretty;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+h1,
+h2 {
+  font-family: var(--font-serif);
+  font-weight: var(--font-weight-normal);
+}
+
+strong,
+b {
+  font-weight: var(--font-weight-bold);
+}
+
+h1 {
+  margin-bottom: 3rem;
+  font-size: 4.4rem;
+  line-height: 1.2;
+  color: var(--c-blue);
+}
+
+h2 {
+  margin-bottom: 2rem;
+  font-size: 3rem;
+  color: var(--c-blue);
+}
+
+h3 {
+  margin-bottom: 1.8rem;
+  font-size: 2rem;
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.01em;
+  color: var(--c-white);
+}
+
+ul {
+  list-style-type:  none;
+}
+
+ul,
+li {
+  padding:  0;
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 7.2rem;
+  }
+
+  h2 {
+    font-size: 4.8rem;
+  }
+
+  h3 {
+    font-size: 2.4rem;
+  }
+
+  p {
+    font-size: 2.2rem;
+  }
+}

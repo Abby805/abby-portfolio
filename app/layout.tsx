@@ -1,4 +1,4 @@
-import './global.css'
+import './styles/global.css'
 import type { Metadata } from 'next'
 import { Navbar } from './components/nav'
 import { Analytics } from '@vercel/analytics/react'
@@ -9,8 +9,8 @@ import { baseUrl } from './sitemap'
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: 'Next.js Portfolio Starter',
-    template: '%s | Next.js Portfolio Starter',
+    default: 'Abby Milberg Portfolio',
+    template: '%s | Abby Milberg',
   },
   description: 'This is my portfolio.',
   openGraph: {
@@ -43,6 +43,7 @@ export default function RootLayout({
     <html
       lang="en"
     >
+      <head></head> 
       <body>
         <main>
           <Navbar />
