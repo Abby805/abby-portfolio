@@ -6,20 +6,21 @@ import footerStyles from '../styles/footer.module.css'
 type FooterLink = {
   href: string
   name: string
-  rel?: string
 }
 
 const footerItems = [
   {
     href: '/rss',
     name: 'RSS',
-    rel: 'noopener noreferrer',
   },
   {
     href: 'https://www.linkedin.com/in/abigailmilberg/',
     name: 'LinkedIn',
-    rel: 'noopener noreferrer',
-  }
+  },
+  {
+    href: 'https://www.drupal.org/u/abbym',
+    name: 'Drupal.org',
+  },
 ]
 
 const Footer = () => {
@@ -32,7 +33,7 @@ const Footer = () => {
               <li key={`footer-${item.href}`}>
                 <Link
                   href={item.href}
-                  rel={item.rel || ''}
+                  rel={'noopener noreferrer'}
                 >
                   {item.name}
                 </Link>
