@@ -25,7 +25,7 @@
 
 const Footer = () => {
   return (
-    <p>Footer here</p>
+    <p>Footer2 here</p>
     // <Row>
     //   <footer className={footerStyles.footer}>
     //     <ul>
