@@ -13,14 +13,14 @@ const footerItems = [
     href: '/rss',
     name: 'RSS',
   },
-  {
-    href: 'https://www.linkedin.com/in/abigailmilberg/',
-    name: 'LinkedIn',
-  },
-  {
-    href: 'https://www.drupal.org/u/abbym',
-    name: 'Drupal.org',
-  },
+  // {
+  //   href: 'https://www.linkedin.com/in/abigailmilberg/',
+  //   name: 'LinkedIn',
+  // },
+  // {
+  //   href: 'https://www.drupal.org/u/abbym',
+  //   name: 'Drupal.org',
+  // },
 ]
 
 const Footer = () => {
