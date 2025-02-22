@@ -23,7 +23,7 @@ const footerItems = [
   },
 ]
 
-const Footer = () => {
+const SiteFooter = () => {
   return (
     <Row>
       <footer className={footerStyles.footer}>
@@ -49,4 +49,4 @@ const Footer = () => {
   )
 }
 
-export default Footer;
+export default SiteFooter;

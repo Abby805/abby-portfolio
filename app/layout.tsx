@@ -4,8 +4,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 
 import Row from './components/layout/Row'
 import Header from './components/Header'
-import Footer from './components/Footer2'
-// import Footer from './components/Footer'
+import SiteFooter from './components/SiteFooter'
 
 import { baseUrl } from './sitemap'
 import './styles/global.css'
@@ -55,7 +54,7 @@ export default function RootLayout({
               {children}
             </Row>
           </main>
-          <Footer />
+          <SiteFooter />
           <Analytics />
           <SpeedInsights />
       </body>
