@@ -5,12 +5,16 @@ type RowProps = {
   children: ReactNode
   color?: 'blue'|'black'
   collapsePadTop?: boolean
+  noRowGap?: boolean
+  className?: string
 }
 
 const Row: React.FC<RowProps> = ({
   children,
   color,
   collapsePadTop,
+  noRowGap,
+  className,
   ...props
 }) => {
   return (
@@ -18,7 +22,9 @@ const Row: React.FC<RowProps> = ({
       className={`
         ${rowStyles['row']} 
         ${color === 'blue' ? rowStyles['row--blue'] : rowStyles['row--black']} 
-        ${collapsePadTop ? rowStyles['pt0'] : ''}
+        ${collapsePadTop ? rowStyles['row--pt0'] : ''}
+        ${noRowGap ? rowStyles['row--no-rowgap'] : ''}
+        ${className}
       `} 
       {...props}
     >
