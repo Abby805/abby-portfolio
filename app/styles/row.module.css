@@ -1,9 +1,7 @@
 .row {
   padding: 2rem;
-}
 
-@media (min-width: 768px) {
-  .row {
+  @media (min-width: 768px) {
     padding: 6rem 4rem;
   }
 }
