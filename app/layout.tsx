@@ -65,15 +65,13 @@ export default function RootLayout({
     >
       <head></head> 
       <body>
-          <Header />
-          <main>
-            <Row color="blue">
-              {children}
-            </Row>
-          </main>
-          <SiteFooter />
-          <Analytics />
-          <SpeedInsights />
+        <Header />
+        <main>
+          {children}
+        </main>
+        <SiteFooter />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )

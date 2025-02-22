@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import Row from './layout/Row';
+import rowStyles from '../styles/row.module.css'
 import footerStyles from '../styles/footer.module.css'
 
 type FooterLink = {
@@ -25,8 +25,8 @@ const footerItems = [
 
 const SiteFooter = () => {
   return (
-    <Row>
-      <footer className={footerStyles.footer}>
+    <footer className={`${rowStyles['row']} ${rowStyles['row--blue']}`}>
+      <div className={rowStyles['stage']}>
         <ul>
           {footerItems.map((item: FooterLink) => {
             return (
@@ -44,8 +44,8 @@ const SiteFooter = () => {
         <p>
           © {new Date().getFullYear()} Abby Milberg
         </p>
-      </footer>
-    </Row>
+      </div>
+    </footer>
   )
 }
 

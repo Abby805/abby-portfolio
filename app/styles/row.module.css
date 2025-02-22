@@ -6,6 +6,13 @@
   }
 }
 
+/* Reduce the padding between them if we have two adjacent row of the same color */
+.row--black + .row--black,
+.row--blue + .row--blue,
+.row--pt0 {
+  padding-top: 0;
+}
+
 .row--blue {
   background: var(--c-blue);
   color: var(--c-gray-dk);
@@ -30,7 +37,7 @@
   display: grid;
   max-width: var(--stage-max);
   margin: 0 auto;
-  gap: 2rem;
-  grid-template-columns: repeat(12, 1fr);
+  gap: 6rem;
+  grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto;
 }
