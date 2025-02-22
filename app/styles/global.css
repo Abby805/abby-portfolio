@@ -2,21 +2,22 @@
   Global styles 
 */
 
-@import url('//fonts.googleapis.com/css?family=Crimson+Text|Mukta:300,700&display=swap');
-
 :root {
-  --c-gray-dk: #222;
+  --stage-max:  120rem;
+
+  --c-gray-dk: #080808;
   --c-white: #fff;
   --c-blue: #369fb9;
-
-  --font-serif: 'Crimson Text', serif;
-  --font-sans: 'Mukta', sans-serif;
 
   --font-weight-normal: 400; /* The only serif weight */
   --font-weight-light: 300; /* 'Normal' for sans */
   --font-weight-bold: 700; /* Sans only */
 
-  --stage-max:  120rem;
+  /* 
+  These are defined in layout.tsx via 'next/font/google'
+  --font-serif: 'Crimson Text';
+  --font-sans: 'Mukta'; 
+  */
 }
 
 *, *::before, *::after {

@@ -1,13 +1,29 @@
 import type { Metadata } from 'next'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import { Mukta, Crimson_Text } from 'next/font/google'
 
 import Row from './components/layout/Row'
 import Header from './components/Header'
 import SiteFooter from './components/SiteFooter'
 
 import { baseUrl } from './sitemap'
+
 import './styles/global.css'
+
+const mukta = Mukta ({
+  weight: ['300', '700'],
+  subsets: ['latin'],
+  variable: '--font-sans',
+  display: 'swap',
+})
+ 
+const crimson = Crimson_Text ({
+  weight: ['400'],
+  subsets: ['latin'],
+  variable: '--font-serif',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -45,6 +61,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      className={`${mukta.variable} ${crimson.variable}`}
     >
       <head></head> 
       <body>
