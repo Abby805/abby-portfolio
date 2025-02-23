@@ -1,29 +1,27 @@
 .footer {
   text-align: center;
+}
 
-  & ul {
-    margin-bottom: 3rem;
+.footer ul {
+  margin-bottom: 3rem;
 
-    @media (min-width: 640px) {
-      display: flex;
-      justify-content: center;
-      gap: 3rem;
-    }
+  @media (min-width: 640px) {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
   }
+}
 
-  & li {
-    margin-bottom: 1rem;
-  }
+.footer li {
+  margin-bottom: 1rem;
+}
 
-  & a {
-    
-    text-decoration: none;
-    color: inherit;
-    transition: 0.3s ease all;
+.footer a {
+  color: inherit;
+  transition: 0.3s ease all;
 
-    &:hover,
-    &:focus {
-      /* text-decoration-color: var(--c-white); */
-    }
+  &:hover,
+  &:focus {
+    text-decoration-color: var(--c-blue);
   }
 }

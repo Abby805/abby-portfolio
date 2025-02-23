@@ -29,7 +29,7 @@ const footerItems = [
 
 const SiteFooter = () => {
   return (
-    <footer className={`${rowStyles['row']} ${rowStyles['row--blue']}`}>
+    <footer className={`${rowStyles['row']} ${rowStyles['row--black']}`}>
       <div className={rowStyles['stage']}>
         <div className={`${rowStyles['col-3']} ${footerStyles['footer']}`}>
           <ul>

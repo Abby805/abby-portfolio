@@ -28,7 +28,8 @@
   color: var(--c-white);
 }
 
-.row--black h1 {
+.row--black h1,
+.row--black h2 {
   color: var(--c-blue);
 }
 

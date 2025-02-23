@@ -5,7 +5,17 @@
 :root {
   --stage-max:  120rem;
 
+  /* 
+    Accessible color combos - text
+
+    gray-dk + blue      OK
+    gray-dk + gray-md   OK
+    gray-dk + white     OK
+    blue + white        Large text only (3.08)
+  */
   --c-gray-dk: #222;
+  --c-gray-md: rgba(255,255,255,0.5);
+  --c-gray-lt: rgba(255,255,255,0.25);
   --c-white: #fff;
   --c-blue: #369fb9;
 
@@ -88,13 +98,17 @@ h1 {
   }
 }
 
+h1 span,
 h2 {
-  margin-bottom: 2rem;
   font-size: 3rem;
 
   @media (min-width: 960px) {
     font-size: 4.8rem;
   }
+}
+
+h2 {
+  margin-bottom: 2rem;
 }
 
 h2 span,
