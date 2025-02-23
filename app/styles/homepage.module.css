@@ -1,3 +1,31 @@
-.exp h2 {
-  margin-bottom: 0;
+.exp_col + .exp_col,
+.blog_col + .blog_col {
+  margin-top: 3rem;
+
+  @media (min-width: 960px) {
+    margin-top: 0;
+  }
+}
+
+.blog_col {
+  & a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+
+    & h3 {
+      /* text-decoration: underline; */
+      transition: 0.3s ease all;
+      /* line-height: 1.8; */
+    }
+
+    &:hover,
+    &:focus {
+      & h3 {
+        /* text-decoration-style: double; */
+
+        /* text-decoration-color: var(--c-blue); */
+      }
+    }
+  }
 }

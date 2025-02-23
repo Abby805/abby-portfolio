@@ -10,16 +10,20 @@ type FooterLink = {
 
 const footerItems = [
   {
-    href: '/rss',
-    name: 'RSS',
+    href: 'https://www.linkedin.com/in/abigailmilberg',
+    name: 'LinkedIn',
   },
   {
-    href: 'https://www.linkedin.com/in/abigailmilberg/',
-    name: 'LinkedIn',
+    href: 'https://bsky.app/profile/abbymilberg.com',
+    name: 'Bluesky',
   },
   {
     href: 'https://www.drupal.org/u/abbym',
     name: 'Drupal.org',
+  },
+  {
+    href: '/rss',
+    name: 'RSS feed',
   },
 ]
 
@@ -27,23 +31,25 @@ const SiteFooter = () => {
   return (
     <footer className={`${rowStyles['row']} ${rowStyles['row--blue']}`}>
       <div className={rowStyles['stage']}>
-        <ul>
-          {footerItems.map((item: FooterLink) => {
-            return (
-              <li key={`footer-${item.href}`}>
-                <Link
-                  href={item.href}
-                  rel={'noopener noreferrer'}
-                >
-                  {item.name}
-                </Link>
-              </li>
-            )
-          })}
-        </ul>
-        <p>
-          © {new Date().getFullYear()} Abby Milberg
-        </p>
+        <div className={`${rowStyles['col-3']} ${footerStyles['footer']}`}>
+          <ul>
+            {footerItems.map((item: FooterLink) => {
+              return (
+                <li key={`footer-${item.href}`}>
+                  <Link
+                    href={item.href}
+                    rel={'noopener noreferrer'}
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              )
+            })}
+          </ul>
+          <p>
+            © {new Date().getFullYear()} Abby Milberg
+          </p>
+        </div>
       </div>
     </footer>
   )

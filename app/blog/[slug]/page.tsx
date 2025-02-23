@@ -3,6 +3,9 @@ import { CustomMDX } from 'app/components/mdx'
 import { formatDate, getBlogPosts } from 'app/blog/utils'
 import { baseUrl } from 'app/sitemap'
 
+import Row from 'app/components/layout/Row'
+import rowStyles from 'app/styles/row.module.css'
+
 export async function generateStaticParams() {
   let posts = getBlogPosts()
 
@@ -62,7 +65,7 @@ export default async function Blog({ params }) {
   }
 
   return (
-    <section>
+    <>
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -85,17 +88,19 @@ export default async function Blog({ params }) {
           }),
         }}
       />
-      <h1>
-        {post.metadata.title}
-      </h1>
-      <div>
-        <p>
-          {formatDate(post.metadata.publishedAt)}
-        </p>
-      </div>
-      <article>
-        <CustomMDX source={post.content} />
-      </article>
-    </section>
+      <Row color="black" collapsePadTop>
+        <div className={rowStyles['col-3']}>
+          <h1>
+            {post.metadata.title}
+          </h1>
+          <p>
+            {formatDate(post.metadata.publishedAt)}
+          </p>
+          <article>
+            <CustomMDX source={post.content} />
+          </article>
+        </div>
+      </Row>  
+    </>
   )
 }
