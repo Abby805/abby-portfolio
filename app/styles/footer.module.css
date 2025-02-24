@@ -22,6 +22,10 @@
 
   &:hover,
   &:focus {
-    text-decoration-color: var(--c-blue);
+    color: var(--c-blue);
   }
+}
+
+.footer svg {
+  width: 2rem;
 }

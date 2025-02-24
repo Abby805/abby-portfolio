@@ -1,29 +1,35 @@
+import React, {ReactNode} from 'react'
 import Link from 'next/link'
 
 import rowStyles from '../styles/row.module.css'
 import footerStyles from '../styles/footer.module.css'
 
+import RSS from 'app/images/icons/rss.svg'
+import Bluesky from 'app/images/icons/bluesky.svg'
+import LinkedIn from 'app/images/icons/linkedin.svg'
+import Drupal from 'app/images/icons/drupal.svg'
+
 type FooterLink = {
   href: string
-  name: string
+  icon: ReactNode
 }
 
 const footerItems = [
   {
     href: 'https://www.linkedin.com/in/abigailmilberg',
-    name: 'LinkedIn',
+    icon: <LinkedIn/>,
   },
   {
     href: 'https://bsky.app/profile/abbymilberg.com',
-    name: 'Bluesky',
+    icon: <Bluesky/>,
   },
   {
     href: 'https://www.drupal.org/u/abbym',
-    name: 'Drupal.org',
+    icon: <Drupal/>,
   },
   {
     href: '/rss',
-    name: 'RSS feed',
+    icon: <RSS/>,
   },
 ]
 
@@ -40,7 +46,7 @@ const SiteFooter = () => {
                     href={item.href}
                     rel={'noopener noreferrer'}
                   >
-                    {item.name}
+                    {item.icon}
                   </Link>
                 </li>
               )
