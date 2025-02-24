@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
-import { Mukta, Crimson_Text } from 'next/font/google'
+import { Mukta, Crimson_Text, Space_Mono } from 'next/font/google'
 
 import Row from './components/layout/Row'
 import Header from './components/Header'
@@ -22,6 +22,13 @@ const crimson = Crimson_Text ({
   weight: ['400'],
   subsets: ['latin'],
   variable: '--font-serif',
+  display: 'swap',
+})
+
+const space_mono = Space_Mono ({
+  weight: ['400'],
+  subsets: ['latin'],
+  variable: '--font-mono',
   display: 'swap',
 })
 
@@ -61,7 +68,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${mukta.variable} ${crimson.variable}`}
+      className={`${mukta.variable} ${crimson.variable} ${space_mono.variable}`}
     >
       <head></head> 
       <body>
