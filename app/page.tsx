@@ -23,7 +23,7 @@ export default function Page() {
   return (
     <>
       <Row color="black" collapsePadTop>
-        <div className={rowStyles['col-8']}>
+        <div className={rowStyles['col-md-8']}>
           <h1>
           Frontend Developer
           </h1>
@@ -36,29 +36,29 @@ export default function Page() {
         </div>
       </Row>
 
-      <Row color="blue" noRowGap className={hpStyles['exp']}>
-        <h2 className={rowStyles['col-12']}>Areas of Expertise</h2>
+      <Row color="blue" className={hpStyles['exp']}>
+      <h2 className={`${rowStyles['col-md-12']} ${rowStyles['h2--gap-offset']}`}>Areas of Expertise</h2>
 
-        <div className={`${rowStyles['col-4']} ${hpStyles['exp_col']}`}>
+        <div className={`${rowStyles['col-md-4']}`}>
           <h3>Component Libraries</h3>
           <p>Working with designers to understand the structure underlying a design system and architecting it to be flexible, robust, and accessible can make the difference between a site that grows and evolves for years, or just another retheme.</p>
         </div>
 
-        <div className={`${rowStyles['col-4']} ${hpStyles['exp_col']}`}>
+        <div className={`${rowStyles['col-md-4']}`}>
           <h3>JavaScript</h3>
           <p>Whether working on a full-blown React app, using vanilla JS, or leveraging libraries like GSAP to add delight, I believe that JavaScript should enhance the user experience for everyone.</p>
         </div>
 
-        <div className={`${rowStyles['col-4']} ${hpStyles['exp_col']}`}>
+        <div className={`${rowStyles['col-md-4']}`}>
           <h3>Drupal</h3>
           <p>I specialize in theming, site-building, and custom module development for complex Drupal sites. Occasionally I get up and talk about it at places like DrupalCon North America, Drupal GovCon, and the DC Drupal Meetup.</p>
         </div>
       </Row>
 
-      <Row color="black" noRowGap className={hpStyles['blog']}>
-        <h2 className={rowStyles['col-12']}>Latest Blog Posts</h2>
+      <Row color="black" className={hpStyles['blog']}>
+        <h2 className={`${rowStyles['col-md-12']} ${rowStyles['h2--gap-offset']}`}>Latest Blog Posts</h2>
         {recentBlogPosts.map((post, i) => (
-          <article className={`${rowStyles['col-4']} ${hpStyles['blog_col']}`} key={`hp-blog--${i}`}>
+          <article className={`${rowStyles['col-md-4']} ${hpStyles['blog_col']}`} key={`hp-blog--${i}`}>
             <Link
               key={post.slug}
               href={`/blog/${post.slug}`}

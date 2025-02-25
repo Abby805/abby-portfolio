@@ -24,7 +24,7 @@ const Row: React.FC<RowProps> = ({
         ${color === 'blue' ? rowStyles['row--blue'] : rowStyles['row--black']} 
         ${collapsePadTop ? rowStyles['row--pt0'] : ''}
         ${noRowGap ? rowStyles['row--no-rowgap'] : ''}
-        ${className}
+        ${className ? className : ''}
       `} 
       {...props}
     >

@@ -26,12 +26,17 @@ type ClientLogo = {
 
 const clientLogos = [
   {
-    logo: Ben,
-    name: 'Benefit Cosmetics',
+    logo: USAID,
+    name: 'USAID',
   },
   {
-    logo: Ebay,
-    name: 'Ebay',
+    logo: NRDC,
+    name: 'NRDC',
+    tall: true,
+  },
+  {
+    logo: SP,
+    name: 'SunPower',
   },
   {
     logo: ESB,
@@ -43,60 +48,57 @@ const clientLogos = [
     tall: true,
   },
   {
-    logo: NRDC,
-    name: 'NRDC',
-    tall: true,
-  },
-  {
     logo: Pol,
     name: 'Politico',
-  },
-  {
-    logo: Pru,
-    name: 'Prudential',
-  },
-  {
-    logo: PSH,
-    name: 'Platform.sh',
   },
   {
     logo: Qui,
     name: 'Quicken',
   },
   {
+    logo: PSH,
+    name: 'Platform.sh',
+  },
+  {
+    logo: Ben,
+    name: 'Benefit Cosmetics',
+  },
+  {
+    logo: Pru,
+    name: 'Prudential',
+  },
+  {
+    logo: Ebay,
+    name: 'Ebay',
+  },
+  {
     logo: SH,
     name: 'StubHub',
-  },
-  {
-    logo: SP,
-    name: 'SunPower',
-  },
-  {
-    logo: USAID,
-    name: 'USAID',
   },
 ]
 
 const ClientLogos: React.FC = () => {
   return (
     <Row color="blue">
-      <h2 className={rowStyles['col-12']}>A Few Happy Clients</h2>
-      {/* <div className={`${rowStyles['col-12']} ${logoStyles['logos']}`}> */}
-        {clientLogos.map((clientLogo:ClientLogo, i) => {
-          return (
-            <div 
-              className={`
-                // ${rowStyles['col-12']}
-                ${logoStyles['logo']} 
-                ${clientLogo.tall ? logoStyles['logo--tall'] : ''}
-              `} 
-              key={`client-logo--${i}`}
-            >
-              <Image src={clientLogo.logo} alt={clientLogo.name} />
-            </div>
-          )
-        })}
-      {/* </div> */}
+      <h2 className={`${rowStyles['col-md-12']} ${rowStyles['h2--gap-offset']}`}>
+        A Few Cool Clients
+      </h2>
+      {clientLogos.map((clientLogo:ClientLogo, i) => {
+        return (
+          <div 
+            className={`
+              ${rowStyles['col-6']}
+              ${rowStyles['col-sm-4']}
+              ${rowStyles['col-md-3']}
+              ${rowStyles['col-lg-2']}
+              ${logoStyles['logo']} 
+            `} 
+            key={`client-logo--${i}`}
+          >
+            <Image src={clientLogo.logo} alt={clientLogo.name} />
+          </div>
+        )
+      })}
     </Row>
   )
 }

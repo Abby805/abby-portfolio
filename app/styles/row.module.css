@@ -39,10 +39,14 @@
   margin: 0 auto;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: auto;
-  gap: 3rem;
+  gap: 3rem 2rem;
+
+  @media (min-width: 592px) {
+    gap: 3rem;
+  }
 
   @media (min-width: 960px) {
-    gap: 6rem;
+    gap: 3rem 6rem;
   }
 
   .row--no-rowgap & {
@@ -50,31 +54,78 @@
   }
 }
 
+/* Offset rowgap so an h2 looks like it has normal h2 margins */
+.h2--gap-offset {
+  margin-bottom: -1rem;
+}
+
 /* 
   Lazy util classes for columns 
+  Add more as needed
 */
 
-/* They're all full width on mobile, let's be real here */
-.col-4,
-.col-8,
-.col-12 {
+/* Default to full width on mobile unless we tell it otherwise */
+.stage > * {
+  /* grid-column-end: span 12; */
   grid-column-end: span 12;
 }
 
 .col-4 {
+  grid-column-end: span 4;
+}
+
+.col-6 {
+  grid-column-end: span 6;
+}
+
+.col-8 {
+  grid-column-end: span 8;
+}
+
+.col-sm-4 {
+  @media (min-width: 592px) {
+    grid-column-end: span 4;
+  }
+}
+
+.col-sm-8 {
+  @media (min-width: 592px) {
+    grid-column-end: span 8;
+  }
+}
+
+.col-sm-12 {
+  @media (min-width: 592px) {
+    grid-column-end: span 12;
+  }
+}
+
+.col-md-3 {
+  @media (min-width: 960px) {
+    grid-column-end: span 3;
+  }
+}
+
+.col-md-4 {
   @media (min-width: 960px) {
     grid-column-end: span 4;
   }
 }
 
-.col-8 {
+.col-md-8 {
   @media (min-width: 960px) {
     grid-column-end: span 8;
   }
 }
 
-.col-12 {
+.col-md-12 {
   @media (min-width: 960px) {
     grid-column-end: span 12;
+  }
+}
+
+.col-lg-2 {
+  @media (min-width: 1200px) {
+    grid-column-end: span 2;
   }
 }

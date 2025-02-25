@@ -89,7 +89,7 @@ export default async function Blog({ params }) {
         }}
       />
       <Row color="black" collapsePadTop>
-        <div className={rowStyles['col-12']}>
+        <div className={rowStyles['col-md-12']}>
           <h1>
             {post.metadata.title}
           </h1>

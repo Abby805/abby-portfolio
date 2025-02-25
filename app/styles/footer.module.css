@@ -4,12 +4,9 @@
 
 .footer ul {
   margin-bottom: 3rem;
-
-  @media (min-width: 640px) {
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
-  }
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
 }
 
 .footer li {
