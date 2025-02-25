@@ -37,7 +37,7 @@ const SiteFooter = () => {
   return (
     <footer className={`${rowStyles['row']} ${rowStyles['row--black']}`}>
       <div className={rowStyles['stage']}>
-        <div className={`${rowStyles['col-3']} ${footerStyles['footer']}`}>
+        <div className={`${rowStyles['col-12']} ${footerStyles['footer']}`}>
           <ul>
             {footerItems.map((item: FooterLink) => {
               return (

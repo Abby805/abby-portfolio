@@ -1,0 +1,13 @@
+.logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6rem;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--c-pink);
+}
+
+.logo {
+  max-width: calc(50% - 3rem);
+  text-align: center;
+}

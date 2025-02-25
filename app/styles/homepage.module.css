@@ -38,16 +38,3 @@
   margin-top: auto;
   color: var(--c-gray-md);
 }
-
-.logos {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 3rem 6rem;
-  justify-content: center;
-  align-items: center;
-}
-
-.logo {
-  max-width: calc(50% - 3rem);
-  text-align: center;
-}

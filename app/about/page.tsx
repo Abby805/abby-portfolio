@@ -10,7 +10,7 @@ export const metadata = {
 export default function Page() {
   return (
     <Row color="black">
-      <div className={rowStyles['col-2']}>
+      <div className={rowStyles['col-8']}>
         <h1>PEBKAC<br/>
           <span>(Person exists beyond keyboard and code)</span>
         </h1>

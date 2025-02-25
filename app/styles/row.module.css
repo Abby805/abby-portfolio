@@ -37,7 +37,7 @@
   display: grid;
   max-width: var(--stage-max);
   margin: 0 auto;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(12, 1fr);
   grid-template-rows: auto;
   gap: 3rem;
 
@@ -50,41 +50,31 @@
   }
 }
 
-/* Lazy util classes for columns */
+/* 
+  Lazy util classes for columns 
+*/
 
 /* They're all full width on mobile, let's be real here */
-.col-1,
-.col-2,
-.col-3 {
-  grid-column-end: span 3;
+.col-4,
+.col-8,
+.col-12 {
+  grid-column-end: span 12;
 }
 
-.col-1 {
+.col-4 {
   @media (min-width: 960px) {
-    grid-column-end: span 1;
+    grid-column-end: span 4;
   }
 }
 
-.col-2 {
+.col-8 {
   @media (min-width: 960px) {
-    grid-column-end: span 2;
+    grid-column-end: span 8;
   }
 }
 
-.col-3 {
+.col-12 {
   @media (min-width: 960px) {
-    grid-column-end: span 3;
-  }
-}
-
-.col-lg-2 {
-  @media (min-width: 1200px) {
-    grid-column-end: span 2;
-  }
-}
-
-.col-lg-3 {
-  @media (min-width: 1200px) {
-    grid-column-end: span 3;
+    grid-column-end: span 12;
   }
 }
