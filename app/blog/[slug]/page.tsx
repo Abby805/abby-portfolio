@@ -5,6 +5,7 @@ import { baseUrl } from 'app/sitemap'
 
 import Row from 'app/components/layout/Row'
 import rowStyles from 'app/styles/row.module.css'
+import blogStyles from 'app/styles/blog.module.css'
 
 export async function generateStaticParams() {
   let posts = getBlogPosts()
@@ -88,14 +89,19 @@ export default async function Blog({ params }) {
           }),
         }}
       />
-      <Row color="black" collapsePadTop>
-        <div className={rowStyles['col-md-12']}>
+
+      <Row color="blue">
+        <div>
           <h1>
             {post.metadata.title}
           </h1>
           <p>
             {formatDate(post.metadata.publishedAt)}
           </p>
+        </div>
+      </Row>
+      <Row color="black">
+        <div className={`${rowStyles['col-md-8']} ${blogStyles['blog_body']}`}>
           <article>
             <CustomMDX source={post.content} />
           </article>

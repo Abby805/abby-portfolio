@@ -1,0 +1,5 @@
+.blog_body {
+  @media (min-width: 960px) {
+    grid-column-start: 3;
+  }
+}
