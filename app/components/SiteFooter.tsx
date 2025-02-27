@@ -1,8 +1,8 @@
 import React, { ReactNode } from 'react'
 import Link from 'next/link'
 
-import rowStyles from '../styles/row.module.css'
-import footerStyles from '../styles/footer.module.css'
+import rowStyles from 'app/styles/row.module.css'
+import footerStyles from 'app/styles/footer.module.css'
 
 import RSS from 'app/images/icons/rss.svg'
 import Bluesky from 'app/images/icons/bluesky.svg'

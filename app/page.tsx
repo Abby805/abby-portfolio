@@ -1,12 +1,10 @@
-import Link from 'next/link'
-
+import BlogCard from 'app/components/BlogCard'
 import ClientLogos from 'app/components/ClientLogos'
-import Row from 'app/components/layout/Row'
+import Row from 'app/components/Row'
 
 import { formatDate, getBlogPosts } from 'app/blog/utils'
 
 import rowStyles from 'app/styles/row.module.css'
-import hpStyles from 'app/styles/homepage.module.css'
 
 export default function Page() {
   let recentBlogPosts = getBlogPosts()
@@ -36,7 +34,7 @@ export default function Page() {
         </div>
       </Row>
 
-      <Row color="blue" className={hpStyles['exp']}>
+      <Row color="blue">
       <h2 className={`${rowStyles['col-md-12']} ${rowStyles['h2--gap-offset']}`}>Areas of Expertise</h2>
 
         <div className={`${rowStyles['col-md-4']}`}>
@@ -55,18 +53,15 @@ export default function Page() {
         </div>
       </Row>
 
-      <Row color="black" className={hpStyles['blog']}>
+      <Row color="black">
         <h2 className={`${rowStyles['col-md-12']} ${rowStyles['h2--gap-offset']}`}>Latest Blog Posts</h2>
         {recentBlogPosts.map((post, i) => (
-          <article className={`${rowStyles['col-md-4']} ${hpStyles['blog_col']}`} key={`hp-blog--${i}`}>
-            <Link
-              key={post.slug}
-              href={`/blog/${post.slug}`}
-            >
-              <h3>{post.metadata.title}</h3>
-              <p>{formatDate(post.metadata.publishedAt, false)}</p>
-            </Link>
-          </article>
+          <BlogCard
+            href={`/blog/${post.slug}`}
+            title={post.metadata.title}
+            date={formatDate(post.metadata.publishedAt, false)}
+            key={`hp-blog--${i}`}
+          />
         ))}
       </Row>
 

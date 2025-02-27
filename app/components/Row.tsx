@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import rowStyles from '../../styles/row.module.css'
+import rowStyles from 'app/styles/row.module.css'
 
 type RowProps = {
   children: ReactNode

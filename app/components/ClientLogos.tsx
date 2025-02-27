@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import Row from 'app/components/layout/Row'
+import Row from 'app/components/Row'
 
 import rowStyles from 'app/styles/row.module.css'
 import logoStyles from 'app/styles/clientLogos.module.css'

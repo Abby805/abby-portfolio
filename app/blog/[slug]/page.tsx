@@ -3,7 +3,7 @@ import { CustomMDX } from 'app/components/mdx'
 import { formatDate, getBlogPosts } from 'app/blog/utils'
 import { baseUrl } from 'app/sitemap'
 
-import Row from 'app/components/layout/Row'
+import Row from 'app/components/Row'
 import rowStyles from 'app/styles/row.module.css'
 import blogStyles from 'app/styles/blog.module.css'
 

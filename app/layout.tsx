@@ -3,13 +3,12 @@ import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Mukta, Crimson_Text, Space_Mono } from 'next/font/google'
 
-import Row from './components/layout/Row'
-import Header from './components/Header'
-import SiteFooter from './components/SiteFooter'
+import Header from 'app/components/Header'
+import SiteFooter from 'app/components/SiteFooter'
 
-import { baseUrl } from './sitemap'
+import { baseUrl } from 'app/sitemap'
 
-import './styles/global.css'
+import 'app/styles/global.css'
 
 const mukta = Mukta ({
   weight: ['300', '700'],
@@ -38,12 +37,12 @@ export const metadata: Metadata = {
     default: 'Abby Milberg Portfolio',
     template: '%s | Abby Milberg',
   },
-  description: 'This is my portfolio.',
+  description: 'Experienced frontend developer specializing in component libraries, javascript, accessibility, and Drupal, with a complementary background in design.',
   openGraph: {
-    title: 'My Portfolio',
-    description: 'This is my portfolio.',
+    title: 'Abby Milberg Portfolio',
+    description: 'Experienced frontend developer specializing in component libraries, javascript, accessibility, and Drupal, with a complementary background in design.',
     url: baseUrl,
-    siteName: 'My Portfolio',
+    siteName: 'Abby Milberg Portfolio',
     locale: 'en_US',
     type: 'website',
   },

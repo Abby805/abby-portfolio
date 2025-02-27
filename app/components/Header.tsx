@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
-import rowStyles from '../styles/row.module.css'
-import headerStyles from '../styles/header.module.css'
+import rowStyles from 'app/styles/row.module.css'
+import headerStyles from 'app/styles/header.module.css'
 
 type NavLink = {
   href: string
