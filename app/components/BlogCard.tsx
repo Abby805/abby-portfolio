@@ -17,7 +17,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
   return (
     <article className={`${rowStyles['col-md-4']} ${blogStyles['blog_col']}`}>
       <Link
-        href={`/blog/${href}`}
+        href={href}
       >
         <h3>{title}</h3>
         <p>{date}</p>
