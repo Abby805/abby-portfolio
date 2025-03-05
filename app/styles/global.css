@@ -118,6 +118,10 @@ h1 {
   margin-bottom: 3rem;
   font-size: 4.4rem;
 
+  &:last-child {
+    margin-bottom: 0;
+  }
+
   @media (min-width: 960px) {
     font-size: 7.2rem;
   }
