@@ -6,6 +6,7 @@ type RowProps = {
   color?: 'blue'|'black'
   collapsePadTop?: boolean
   noRowGap?: boolean
+  thin?: boolean
   className?: string
 }
 
@@ -14,6 +15,7 @@ const Row: React.FC<RowProps> = ({
   color,
   collapsePadTop,
   noRowGap,
+  thin,
   className,
   ...props
 }) => {
@@ -24,6 +26,7 @@ const Row: React.FC<RowProps> = ({
         ${color === 'blue' ? rowStyles['row--blue'] : rowStyles['row--black']} 
         ${collapsePadTop ? rowStyles['row--pt0'] : ''}
         ${noRowGap ? rowStyles['row--no-rowgap'] : ''}
+        ${thin ? rowStyles['row--thin'] : ''}
         ${className ? className : ''}
       `} 
       {...props}

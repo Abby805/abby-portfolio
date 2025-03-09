@@ -6,6 +6,14 @@
   }
 }
 
+.row--thin {
+  padding: 1rem 2rem;
+
+  @media (min-width: 960px) {
+    padding: 2rem 4rem;
+  }
+}
+
 /* Reduce the padding between them if we have two adjacent row of the same color */
 .row--black + .row--black,
 .row--blue + .row--blue,

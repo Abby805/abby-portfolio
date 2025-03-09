@@ -28,6 +28,4 @@
 .blog_col p {
   margin-top: auto;
   color: var(--c-gray-md);
-  text-transform: uppercase;
-  font-size: 1.8rem;
 }

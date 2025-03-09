@@ -31,7 +31,7 @@ const Header = () => {
           <ul>
             {navItems.map((item: NavLink) => {
               return (
-                <li key={`header${item.href}`}>
+                <li key={`header${item.href}`} className="sidenote">
                   <Link
                     href={item.href}
                   >

@@ -98,6 +98,11 @@ p {
   }
 }
 
+.sidenote {
+  text-transform: uppercase;
+  font-size: 1.8rem;
+}
+
 h1, h2, h3, h4, h5, h6 {
   line-height: 1.2;
   text-wrap: balance;
@@ -138,6 +143,10 @@ h2 {
 
 h2 {
   margin-bottom: 2rem;
+
+  &:not(:first-child) {
+    margin-top: 4rem;
+  }
 }
 
 h2 span,
@@ -184,6 +193,6 @@ code {
 pre code {
   display: block;
   overflow: auto;
-  margin-bottom: 3.6rem;
+  margin: 3.6rem 0;
   padding: 1.8rem;
 }

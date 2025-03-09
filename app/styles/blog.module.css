@@ -1,9 +1,3 @@
-.blog_date,
-.blog_share {
-  text-transform: uppercase;
-  font-size: 1.8rem;
-}
-
 .blog_date time {
   font-weight: var(--font-weight-bold);
 }
@@ -24,6 +18,14 @@
 .blog_sidebar {
   @media (min-width: 960px) {
     grid-column-start: 9;
+    position: relative;
+    margin-top: -2rem;
+    padding-top: 2rem;
+
+    & > p {
+      position: sticky;
+      top: 2rem;
+    }
   }
 }
 

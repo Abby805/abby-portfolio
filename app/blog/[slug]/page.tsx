@@ -98,18 +98,17 @@ export default async function Blog({ params }) {
         </div>
       </Row>
 
-      <Row color="blue">
+      <Row color="blue" thin>
         <div>
-          <p className={`${blogStyles['blog_date']}`}>
+          <p className={`sidenote ${blogStyles['blog_date']}`}>
             Published on <time dateTime={post.metadata.publishedAt}>{formatDate(post.metadata.publishedAt)}</time>
           </p>
         </div>
       </Row>
       <Row color="black">
-      <div className={`${rowStyles['col-md-4']} ${blogStyles['blog_sidebar']}`}>
-        <p className={`${blogStyles['blog_share']}`}>Sharing is caring!</p>
-        
-      </div>
+        <div className={`${rowStyles['col-md-4']} ${blogStyles['blog_sidebar']}`}>
+          <p className={`sidenote ${blogStyles['blog_share']}`}>Sharing is caring!</p>
+        </div>
         <div className={`${rowStyles['col-md-8']} ${blogStyles['blog_body']}`}>
           <article>
             <CustomMDX source={post.content} />

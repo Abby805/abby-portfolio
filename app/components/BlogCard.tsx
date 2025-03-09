@@ -20,7 +20,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
         href={href}
       >
         <h3>{title}</h3>
-        <p>{date}</p>
+        <p className="sidenote">{date}</p>
       </Link>
     </article>
   )

@@ -52,7 +52,7 @@ const SiteFooter = () => {
               )
             })}
           </ul>
-          <p>
+          <p className="sidenote">
             © {new Date().getFullYear()} Abby Milberg
           </p>
         </div>
