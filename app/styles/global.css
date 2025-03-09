@@ -25,9 +25,8 @@
   --c-blue-dk: #1A5561;
 
   /* For code highlighting only - Accessible on gray-dk */
-  --c-pink: #CC3369;
-  /* --c-orange: #E55A10; */
-  --c-buff: #BF6D40;
+  --c-pink: #ff337a;
+  --c-buff: #dd7136;
   --c-mint: #04E8A2;
 
   /* Code syntax highlighting */

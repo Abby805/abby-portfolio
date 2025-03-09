@@ -1,3 +1,6 @@
+import React, { ReactNode } from 'react'
+import Link from 'next/link'
+
 import { notFound } from 'next/navigation'
 import { CustomMDX } from 'app/components/CustomMDX'
 import { formatDate, getBlogPosts } from 'app/blog/utils'
@@ -6,6 +9,15 @@ import { baseUrl } from 'app/sitemap'
 import Row from 'app/components/Row'
 import rowStyles from 'app/styles/row.module.css'
 import blogStyles from 'app/styles/blog.module.css'
+
+import Bluesky from 'app/images/icons/bluesky.svg'
+import LinkedIn from 'app/images/icons/linkedin.svg'
+
+type ShareLink = {
+  name: string
+  href: string
+  icon: ReactNode
+}
 
 export async function generateStaticParams() {
   let posts = getBlogPosts()
@@ -65,6 +77,19 @@ export default async function Blog({ params }) {
     notFound()
   }
 
+  const shareLinks = [
+    {
+      name: 'Bluesky',
+      href: `https://bsky.app/intent/compose?text=${encodeURI(`${post.metadata.title} http://abbymilberg.com/blog/${post.slug}`)}`,
+      icon: <Bluesky/>,
+    },
+    {
+      name: 'LinkedIn',
+      href: `https://www.linkedin.com/shareArticle?mini=true&amp;url=http://abbymilberg.com/blog/${post.slug}`,
+      icon: <LinkedIn/>,
+    },
+  ]
+
   return (
     <>
       <script
@@ -106,13 +131,31 @@ export default async function Blog({ params }) {
         </div>
       </Row>
       <Row color="black">
-        <div className={`${rowStyles['col-md-4']} ${blogStyles['blog_sidebar']}`}>
-          <p className={`sidenote ${blogStyles['blog_share']}`}>Sharing is caring!</p>
-        </div>
         <div className={`${rowStyles['col-md-8']} ${blogStyles['blog_body']}`}>
           <article>
             <CustomMDX source={post.content} />
           </article>
+        </div>
+        <div className={`${rowStyles['col-md-4']} ${blogStyles['blog_sidebar']}`}>
+          <div className={`${blogStyles['blog_share']}`}>
+            <p className={`sidenote`}>Sharing is caring!</p>
+            <ul className={`${blogStyles['blog_share-items']}`}>
+              {shareLinks.map((item: ShareLink) => {
+                return (
+                  <li key={`share-${item.href}`}>
+                    <Link
+                      href={item.href}
+                      rel={'noopener noreferrer'}
+                      target="_blank"
+                      title={`Share on ${item.name}`}
+                    >
+                      {item.icon}
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
         </div>
       </Row>  
     </>
