@@ -41,6 +41,7 @@ export async function generateMetadata({ params }) {
     summary: description,
     image,
   } = post.metadata
+
   let ogImage = image
     ? image
     : `${baseUrl}/og?title=${encodeURIComponent(title)}`
@@ -80,12 +81,12 @@ export default async function Blog({ params }) {
   const shareLinks = [
     {
       name: 'Bluesky',
-      href: `https://bsky.app/intent/compose?text=${encodeURI(`${post.metadata.title} http://abbymilberg.com/blog/${post.slug}`)}`,
+      href: `https://bsky.app/intent/compose?text=${encodeURI(`${post.metadata.title} ${baseUrl}/blog/${post.slug}`)}`,
       icon: <Bluesky/>,
     },
     {
       name: 'LinkedIn',
-      href: `https://www.linkedin.com/shareArticle?mini=true&amp;url=http://abbymilberg.com/blog/${post.slug}`,
+      href: `https://www.linkedin.com/shareArticle?mini=true&amp;url=${baseUrl}/blog/${post.slug}`,
       icon: <LinkedIn/>,
     },
   ]
