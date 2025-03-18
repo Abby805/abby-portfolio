@@ -120,9 +120,7 @@ the site, either.
 
 These code examples use [Emotion](https://emotion.sh/docs/introduction) on React
 components, but you could adapt the same principle to work with almost any 
-CSS-in-JS setup. (And at the end of the post I'll touch on how to do something
-similar-ish with SCSS if you've yet to be convinced that _All of Ur Interwebs R 
-Belong 2 JavaScript_.)
+CSS-in-JS setup.
 
 First, define all of your heading styles as variables. For simplicity's sake, 
 I've named each one to match the heading tag they match with most of the time 
@@ -211,27 +209,39 @@ components like so:
 />
 ```
 
-ADD VALIDATION STUFF
+Finally, what if there are areas of your project where it isn't practical to use
+a custom component in lieu of traditional HTML tags? For instance, the project
+for which I first wrote this component included a blog that pulled simple markup
+from a CMS, and writing a custom renderer to replace every heading tag with this
+component seemed like overkill. 
 
-WORDSMITH Okay but what about text that isn't using elements, like something coming from
-a body field in a CMS? 
+For these instances, I wound up using the same CSS-in-JS variables that we pull
+into `Heading`, but scoping them directly to where I need them.
 
 ```js
-// src/styles/global.js
-export const blogBodyStyles = css`
-  h2:not([class]) {
+// src/templates/blog-post.tsx
+const blogBodyStyles = css`
+  h2 {
     ${h2}
   }
 
-  h3:not([class]) {
+  h3 {
     ${h3}
   }
-
   // etc.  
 `
+
+return (
+  <div css={blogBodyStyles}>
+    {renderedBlogBody}
+  </div>
+)
 ```
 
-ADD SCSS EXTEND STUFF
+And there you have it: the flexibility to match your heading styles to any 
+design while maintaining semantically correct HTML and clean CSS!
+
+<hr/>
 
 <ol className="references">
   <li id="cite-1"><cite><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements#accessibility">MDN | The HTML Section Heading elements</a></cite></li>
