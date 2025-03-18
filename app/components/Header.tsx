@@ -13,10 +13,10 @@ const navItems = [
     href: '/blog',
     name: 'Blog',
   },
-  {
-    href: '/about',
-    name: 'About',
-  },
+  // {
+  //   href: '/about',
+  //   name: 'About',
+  // },
 ]
 
 const Header = () => {
