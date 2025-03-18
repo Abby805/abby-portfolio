@@ -75,13 +75,12 @@ This is a common approach, and allows us apply any class to any tag, like so:
 ```
 
 At first glance, this solves our problem. In practice, though, it only works if
-every one of our heading tags has all the same properties set. 
-
-In our original default styles, the `h2` selector has values for `font-family`, 
-`font-weight`, and `text-transform` which the `.h3` selector does nothing to 
-override (presumably because we wanted `h3` to inherit the default from `body`). 
-So our `<h2 class="h3">` will wind up rendering with a combination of styles 
-deriving from `h2` and `.h3`.
+every one of our heading tags has all the same properties set. In our original 
+example, the `h2` selector has values for `font-family`, `font-weight`, and 
+`text-transform`, but the `.h3` selector does not (presumably because we wanted 
+`h3` to inherit the defaults from `body`). Because not all of the `h2` properties 
+are overridden, though, `<h2 class="h3">` will wind up rendering with a 
+combination of styles deriving from `h2` and `.h3`.
 
 ```css
 h2, .h2 {
@@ -106,37 +105,67 @@ h3, .h3 {
 }
 ```
 
-Having to override heading styles all the time creates specificity issues and generally messy code.
+That's not the desired effect. You _could_ get around this by making sure that 
+each property defined on _any_ of your heading styles is explicitly defined on 
+_all_ of your heading styles, but that throws the entire concept of "Don't 
+Repeat Yourself (DRY)" out the window, robs CSS of the "cascade" it's named for, 
+and frankly sounds like a giant headache.
 
-## The solution
+## The Solution
 
-Lookit my cool example for how to handle this in CSS-in-JS (react, emotion)
+In most of my recent projects, I've avoided the messiness of overriding default
+heading styles by **not defining default styles for heading elements at all.**
+And no, we're not going to have to redefine our styles for every heading tag on
+the site, either.
 
-First define all your styles as variables.
+These code examples use [Emotion](https://emotion.sh/docs/introduction) on React
+components, but you could adapt the same principle to work with almost any 
+CSS-in-JS setup. (And at the end of the post I'll touch on how to do something
+similar-ish with SCSS if you've yet to be convinced that _All of Ur Interwebs R 
+Belong 2 JavaScript_.)
+
+First, define all of your heading styles as variables. For simplicity's sake, 
+I've named each one to match the heading tag they match with most of the time 
+(the one they'd go with in a style guide).
 
 ```js
 # src/styles/global.js
 
 export const h1 = css`
+  font-size: 44px;
   font-family: 'Crimson Text', serif;
-  font-size: 4rem;
-  font-weight: 700;
 `
 
 export const h2 = css`
-  font-family: 'Mukta', sans-serif;
-  font-size: 3rem;
-  font-weight: 400;
+  font-size: 36px;
+  font-family: 'Crimson Text', serif;
+  font-weight: 700;
+  text-transform: uppercase;
 `
+
+export const h3 = css` {
+  font-size: 24px;
+  color: #333333;
+}
 
 # etc.
 ```
 
-Now set up your component
+Next, we're going to set up a JSX component that will render headings. It's 
+going to accept three props: 
+
+* `text` is the content that appears between the heading's opening and closing
+tags. For purposes of this example, I'm limiting it to a simple string, but you
+could use anything here, including `children`.
+* `level` will be an integer from 1 through 6, corresponding to the HTML tag we
+want to render (`<h1>`, `<h2>`, etc.) 
+* `levelStyle` will also be an integer from 1 through 6, but will correspond to
+which of the styles defined in the previous step we want to use. We'll make this
+prop optional, and set things up so that if it's left blank the style will fall
+back to the same as the tag level.
 
 ```ts
 // src/components/Heading.tsx
-
 import { jsx } from "@emotion/react";
 import { h1, h2, h3, h4, h5, h6 } from '../styles/global';
 
@@ -147,14 +176,13 @@ type HeadingProps = {
 }
 
 const Heading = ({ text, level, levelStyle, ...props }: HeadingProps) : JSX.Element => {
-
   const styleLevel = levelStyle ?? level;
-  const styles = [h1, h2, h3, h4, h5, h6];
-  const myStyle = styles[styleLevel - 1];
+  const headingStyles = [h1, h2, h3, h4, h5, h6];
+  const visualStyle = headingStyles[styleLevel - 1];
   const HeadingTag = jsx(
     `h${level}`,
     {
-      css: myStyle,
+      css: visualStyle,
       ...props,
     },
     text
@@ -166,29 +194,30 @@ const Heading = ({ text, level, levelStyle, ...props }: HeadingProps) : JSX.Elem
 export default Heading;
 ```
 
-And then you use it like this
+We can then use our new Heading component in pages, templates, or other 
+components like so:
 
 ```ts
-// somepage.tsx
 <Heading
-  text="A header with overridden styles"
+  text="An H2 cleverly disguised as an H3!"
   level={2}
-  levelStyle={4}
+  levelStyle={3}
 />
 
 // or:
 <Heading
-  text="Some header with default styles"
+  text="An H2 that's comfortable in its own skin"
   level={2}
 />
 ```
 
-Okay but what about text that isn't using elements, like something coming from
+ADD VALIDATION STUFF
+
+WORDSMITH Okay but what about text that isn't using elements, like something coming from
 a body field in a CMS? 
 
 ```js
 // src/styles/global.js
-
 export const blogBodyStyles = css`
   h2:not([class]) {
     ${h2}
@@ -202,6 +231,7 @@ export const blogBodyStyles = css`
 `
 ```
 
+ADD SCSS EXTEND STUFF
 
 <ol className="references">
   <li id="cite-1"><cite><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements#accessibility">MDN | The HTML Section Heading elements</a></cite></li>

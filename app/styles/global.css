@@ -90,8 +90,13 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 p {
-  margin-bottom: 1.8rem;
+  margin-bottom: 2.4rem;
+  line-height: 1.8;
   text-wrap: pretty;
+
+  @media (min-width: 960px) {
+    margin-bottom: 3.6rem;
+  }
 
   &:last-child {
     margin-bottom: 0;
