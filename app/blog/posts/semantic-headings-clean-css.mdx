@@ -6,10 +6,107 @@ summary: 'LOREM IPSUM'
 
 ## The Challenge
 
-WORDSMITH ALLLLL THIS ENTIRE THING. Accessibility and semantic HTML require that headings proceed in order, without
-skipping levels.<sup><a href="#cite-1">1</a></sup> Visually, however, a design often calls for a heading
-style to appear "out of order." Having to override heading styles all the time creates
-specificity issues and generally messy code.
+Let's say a designer gives you a style guide with styles for heading levels one 
+through six. The h1 styles are the largest, and they get progressively
+smaller until you reach h6, maybe following some sort of nice vertical 
+rhythm. 
+
+So you set up some default styles:
+
+```css
+h1 {
+  font-size: 44px;
+  font-family: 'Crimson Text', serif;
+}
+
+h2 {
+  font-size: 36px;
+  font-family: 'Crimson Text', serif;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+h3 {
+  font-size: 24px;
+  color: #333333;
+}
+
+/* etc. */
+```
+
+It seems simple enough, until you start getting mockups of actual pages. Maybe 
+h4 styles are being used in places that semantically ought to use an h2. 
+Maybe some content types use h2 styles for their h1 title. In almost 20 
+years of building websites, every project I've ever worked on has skipped heading 
+level styles _somewhere_ on the site for aesthetic reasons.
+
+As the developer, how do you handle this? The easiest and tempting answer is to 
+simply use whichver HTML tag matches the style on the mockup. But accessibility 
+and semantic HTML require that headings proceed in order, without skipping 
+levels.<sup><a href="#cite-1">1</a></sup> You don't want to confuse screen 
+readers or hamper your site's SEO by taking this shortcut.
+
+So maybe you add some classes to let you override the default styles. This might
+look slightly different if you're using a preprocessor like SCSS or a CSS-in-JS 
+solution, but the result is something like this:
+
+```css
+h1, .h1 {
+  /* styles here */
+}
+
+h2, .h2 {
+  /* styles here */
+}
+
+h3 , .h3 {
+  /* styles here */
+}
+
+/* etc. */
+```
+
+This is a common approach, and allows us apply any class to any tag, like so:
+
+```html
+<h2 class="h3">
+  An H2 cleverly disguised as an H3!
+</h2>
+```
+
+At first glance, this solves our problem. In practice, though, it only works if
+every one of our heading tags has all the same properties set. 
+
+In our original default styles, the `h2` selector has values for `font-family`, 
+`font-weight`, and `text-transform` which the `.h3` selector does nothing to 
+override (presumably because we wanted `h3` to inherit the default from `body`). 
+So our `<h2 class="h3">` will wind up rendering with a combination of styles 
+deriving from `h2` and `.h3`.
+
+```css
+h2, .h2 {
+  font-size: 36px;
+  font-family: 'Crimson Text', serif;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+h3, .h3 {
+  font-size: 24px;
+  color: #333333;
+}
+
+/* Computed styles for h2.h3 */
+.frankenheading {
+  font-size: 24px;
+  font-family: 'Crimson Text', serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #333333;
+}
+```
+
+Having to override heading styles all the time creates specificity issues and generally messy code.
 
 ## The solution
 
