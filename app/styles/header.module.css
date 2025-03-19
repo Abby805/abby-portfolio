@@ -1,0 +1,30 @@
+.stage {
+  align-items: center;
+}
+
+.logo-link {
+  display: block;
+  width: 12.9rem;
+  line-height: 0;
+}
+
+.logo polygon,
+.logo path {
+  fill: var(--c-white);
+}
+
+.nav ul {
+  display: flex;
+  justify-content: flex-end;
+  gap: 3rem;
+}
+
+.nav a {
+  color: inherit;
+  transition: 0.3s ease all;
+
+  &:hover,
+  &:focus {
+    text-decoration-color: var(--c-blue);
+  }
+}

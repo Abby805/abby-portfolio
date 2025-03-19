@@ -1,0 +1,249 @@
+---
+title: 'Semantic headings or clean CSS? Why not both?'
+publishedAt: '2025-03-03'
+summary: 'How to maintain flexibility with heading styles without sacrificing 
+semantically correct HTML or clean CSS.'
+---
+
+## The Challenge
+
+Let's say a designer gives you a style guide with styles for heading levels one 
+through six. The h1 styles are the largest, and they get progressively
+smaller until you reach h6, maybe following some sort of nice vertical 
+rhythm. 
+
+So you set up some default styles:
+
+```css
+h1 {
+  font-size: 44px;
+  font-family: 'Crimson Text', serif;
+}
+
+h2 {
+  font-size: 36px;
+  font-family: 'Crimson Text', serif;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+h3 {
+  font-size: 24px;
+  color: #333333;
+}
+
+/* etc. */
+```
+
+It seems simple enough, until you start getting mockups of actual pages. Maybe 
+h4 styles are being used in places that semantically ought to use an h2. 
+Maybe some content types use h2 styles for their h1 title. In almost 20 
+years of building websites, every project I've ever worked on has skipped heading 
+level styles _somewhere_ on the site for aesthetic reasons.
+
+As the developer, how do you handle this? The easiest and tempting answer is to 
+simply use whichver HTML tag matches the style on the mockup. But accessibility 
+and semantic HTML require that headings proceed in order, without skipping 
+levels.<sup><a href="#cite-1">1</a></sup> You don't want to confuse screen 
+readers or hamper your site's SEO by taking this shortcut.
+
+So maybe you add some classes to let you override the default styles. This might
+look slightly different if you're using a preprocessor like SCSS or a CSS-in-JS 
+solution, but the result is something like this:
+
+```css
+h1, .h1 {
+  /* styles here */
+}
+
+h2, .h2 {
+  /* styles here */
+}
+
+h3 , .h3 {
+  /* styles here */
+}
+
+/* etc. */
+```
+
+This is a common approach, and allows us apply any class to any tag, like so:
+
+```html
+<h2 class="h3">
+  An H2 cleverly disguised as an H3!
+</h2>
+```
+
+At first glance, this solves our problem. In practice, though, it only works if
+every one of our heading tags has all the same properties set. In our original 
+example, the `h2` selector has values for `font-family`, `font-weight`, and 
+`text-transform`, but the `.h3` selector does not (presumably because we wanted 
+`h3` to inherit the defaults from `body`). Because not all of the `h2` properties 
+are overridden, though, `<h2 class="h3">` will wind up rendering with a 
+combination of styles deriving from `h2` and `.h3`.
+
+```css
+h2, .h2 {
+  font-size: 36px;
+  font-family: 'Crimson Text', serif;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+h3, .h3 {
+  font-size: 24px;
+  color: #333333;
+}
+
+/* Computed styles for h2.h3 */
+.frankenheading {
+  font-size: 24px;
+  font-family: 'Crimson Text', serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #333333;
+}
+```
+
+That's not the desired effect. You _could_ get around this by making sure that 
+each property defined on _any_ of your heading styles is explicitly defined on 
+_all_ of your heading styles, but that throws the entire concept of "Don't 
+Repeat Yourself (DRY)" out the window, robs CSS of the "cascade" it's named for, 
+and frankly sounds like a giant headache.
+
+## The Solution
+
+In most of my recent projects, I've avoided the messiness of overriding default
+heading styles by **not defining default styles for heading elements at all.**
+And no, we're not going to have to redefine our styles for every heading tag on
+the site, either.
+
+These code examples use [Emotion](https://emotion.sh/docs/introduction) on React
+components, but you could adapt the same principle to work with almost any 
+CSS-in-JS setup.
+
+First, define all of your heading styles as variables. For simplicity's sake, 
+I've named each one to match the heading tag they match with most of the time 
+(the one they'd go with in a style guide).
+
+```js
+# src/styles/global.js
+
+export const h1 = css`
+  font-size: 44px;
+  font-family: 'Crimson Text', serif;
+`
+
+export const h2 = css`
+  font-size: 36px;
+  font-family: 'Crimson Text', serif;
+  font-weight: 700;
+  text-transform: uppercase;
+`
+
+export const h3 = css` {
+  font-size: 24px;
+  color: #333333;
+}
+
+# etc.
+```
+
+Next, we're going to set up a JSX component that will render headings. It's 
+going to accept three props: 
+
+* `text` is the content that appears between the heading's opening and closing
+tags. For purposes of this example, I'm limiting it to a simple string, but you
+could use anything here, including `children`.
+* `level` will be an integer from 1 through 6, corresponding to the HTML tag we
+want to render (`<h1>`, `<h2>`, etc.) 
+* `levelStyle` will also be an integer from 1 through 6, but will correspond to
+which of the styles defined in the previous step we want to use. We'll make this
+prop optional, and set things up so that if it's left blank the style will fall
+back to the same as the tag level.
+
+```ts
+// src/components/Heading.tsx
+import { jsx } from "@emotion/react";
+import { h1, h2, h3, h4, h5, h6 } from '../styles/global';
+
+type HeadingProps = {
+  text: string
+  level: number
+  levelStyle?: number
+}
+
+const Heading = ({ text, level, levelStyle, ...props }: HeadingProps) : JSX.Element => {
+  const styleLevel = levelStyle ?? level;
+  const headingStyles = [h1, h2, h3, h4, h5, h6];
+  const visualStyle = headingStyles[styleLevel - 1];
+  const HeadingTag = jsx(
+    `h${level}`,
+    {
+      css: visualStyle,
+      ...props,
+    },
+    text
+  );
+
+  return HeadingTag;
+};
+
+export default Heading;
+```
+
+We can then use our new Heading component in pages, templates, or other 
+components like so:
+
+```ts
+<Heading
+  text="An H2 cleverly disguised as an H3!"
+  level={2}
+  levelStyle={3}
+/>
+
+// or:
+<Heading
+  text="An H2 that's comfortable in its own skin"
+  level={2}
+/>
+```
+
+Finally, what if there are areas of your project where it isn't practical to use
+a custom component in lieu of traditional HTML tags? For instance, the project
+for which I first wrote this component included a blog that pulled simple markup
+from a CMS, and writing a custom renderer to replace every heading tag with this
+component seemed like overkill. 
+
+For these instances, I wound up using the same CSS-in-JS variables that we pull
+into `Heading`, but scoping them directly to where I need them.
+
+```js
+// src/templates/blog-post.tsx
+const blogBodyStyles = css`
+  h2 {
+    ${h2}
+  }
+
+  h3 {
+    ${h3}
+  }
+  // etc.  
+`
+
+return (
+  <div css={blogBodyStyles}>
+    {renderedBlogBody}
+  </div>
+)
+```
+
+And there you have it: the flexibility to match your heading styles to any 
+design while maintaining semantically correct HTML and clean CSS!
+
+<hr/>
+
+<ol className="references">
+  <li id="cite-1"><cite><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements#accessibility">MDN | The HTML Section Heading elements</a></cite></li>
+</ol>

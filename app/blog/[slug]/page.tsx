@@ -1,7 +1,23 @@
+import React, { ReactNode } from 'react'
+import Link from 'next/link'
+
 import { notFound } from 'next/navigation'
-import { CustomMDX } from 'app/components/mdx'
+import { CustomMDX } from 'app/components/CustomMDX'
 import { formatDate, getBlogPosts } from 'app/blog/utils'
 import { baseUrl } from 'app/sitemap'
+
+import Row from 'app/components/Row'
+import rowStyles from 'app/styles/row.module.css'
+import blogStyles from 'app/styles/blog.module.css'
+
+import Bluesky from 'app/images/icons/bluesky.svg'
+import LinkedIn from 'app/images/icons/linkedin.svg'
+
+type ShareLink = {
+  name: string
+  href: string
+  icon: ReactNode
+}
 
 export async function generateStaticParams() {
   let posts = getBlogPosts()
@@ -11,8 +27,10 @@ export async function generateStaticParams() {
   }))
 }
 
-export function generateMetadata({ params }) {
-  let post = getBlogPosts().find((post) => post.slug === params.slug)
+export async function generateMetadata({ params }) {
+  let blogParams = await params;
+  let post = getBlogPosts().find((post) => post.slug === blogParams.slug)
+
   if (!post) {
     return
   }
@@ -23,6 +41,7 @@ export function generateMetadata({ params }) {
     summary: description,
     image,
   } = post.metadata
+
   let ogImage = image
     ? image
     : `${baseUrl}/og?title=${encodeURIComponent(title)}`
@@ -51,15 +70,29 @@ export function generateMetadata({ params }) {
   }
 }
 
-export default function Blog({ params }) {
-  let post = getBlogPosts().find((post) => post.slug === params.slug)
+export default async function Blog({ params }) {
+  let blogParams = await params;
+  let post = getBlogPosts().find((post) => post.slug === blogParams.slug)
 
   if (!post) {
     notFound()
   }
 
+  const shareLinks = [
+    {
+      name: 'Bluesky',
+      href: `https://bsky.app/intent/compose?text=${encodeURI(`${post.metadata.title} ${baseUrl}/blog/${post.slug}`)}`,
+      icon: <Bluesky/>,
+    },
+    {
+      name: 'LinkedIn',
+      href: `https://www.linkedin.com/shareArticle?mini=true&amp;url=${baseUrl}/blog/${post.slug}`,
+      icon: <LinkedIn/>,
+    },
+  ]
+
   return (
-    <section>
+    <>
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -77,22 +110,55 @@ export default function Blog({ params }) {
             url: `${baseUrl}/blog/${post.slug}`,
             author: {
               '@type': 'Person',
-              name: 'My Portfolio',
+              name: 'Abby Milberg',
             },
           }),
         }}
       />
-      <h1 className="title font-semibold text-2xl tracking-tighter">
-        {post.metadata.title}
-      </h1>
-      <div className="flex justify-between items-center mt-2 mb-8 text-sm">
-        <p className="text-sm text-neutral-600 dark:text-neutral-400">
-          {formatDate(post.metadata.publishedAt)}
-        </p>
-      </div>
-      <article className="prose">
-        <CustomMDX source={post.content} />
-      </article>
-    </section>
+
+      <Row color="black" collapsePadTop>
+        <div>
+          <h1>
+            {post.metadata.title}
+          </h1>
+        </div>
+      </Row>
+
+      <Row color="blue" thin>
+        <div>
+          <p className={`sidenote ${blogStyles['blog_date']}`}>
+            Published on <time dateTime={post.metadata.publishedAt}>{formatDate(post.metadata.publishedAt)}</time>
+          </p>
+        </div>
+      </Row>
+      <Row color="black">
+        <div className={`${rowStyles['col-md-8']} ${blogStyles['blog_body']}`}>
+          <article>
+            <CustomMDX source={post.content} />
+          </article>
+        </div>
+        <div className={`${rowStyles['col-md-4']} ${blogStyles['blog_sidebar']}`}>
+          <div className={`${blogStyles['blog_share']}`}>
+            <p className={`sidenote`}>Sharing is caring!</p>
+            <ul className={`${blogStyles['blog_share-items']}`}>
+              {shareLinks.map((item: ShareLink) => {
+                return (
+                  <li key={`share-${item.href}`}>
+                    <Link
+                      href={item.href}
+                      rel={'noopener noreferrer'}
+                      target="_blank"
+                      title={`Share on ${item.name}`}
+                    >
+                      {item.icon}
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+        </div>
+      </Row>  
+    </>
   )
 }

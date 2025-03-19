@@ -1,0 +1,210 @@
+/* 
+  Global styles 
+*/
+
+:root {
+  /* Primary colors */
+  /* 
+    A11Y Combos
+    -----------
+    gray-dk + blue      OK
+    gray-dk + white     OK
+    blue + white        Large text only 
+  */
+  --c-gray-dk: #222;
+  --c-white: #fff; 
+  --c-blue: #369fb9;
+
+  /* Secondary colors - Accessible on gray-dk */
+  --c-gray-md: rgba(255,255,255,0.5);
+  --c-gold: #c08b10;
+  --c-gold-lt: #BF9A40;
+
+  /* Accent colors - NOT accessible for text */
+  --c-gray-lt: rgba(255,255,255,0.25);
+  --c-blue-dk: #1A5561;
+
+  /* For code highlighting only - Accessible on gray-dk */
+  --c-pink: #ff337a;
+  --c-buff: #dd7136;
+  --c-mint: #04E8A2;
+
+  /* Code syntax highlighting */
+  --sh-class: var(--c-mint);
+  --sh-identifier: var(--c-white);
+  --sh-sign: var(--c-gray-md);
+  --sh-property: var(--c-buff);
+  --sh-entity: var(--c-gold);
+  --sh-jsxliterals: var(--c-gold-lt);
+  --sh-string: var(--c-pink);
+  --sh-keyword: var(--c-blue);
+  --sh-comment: var(--c-gray-md);
+
+  --stage-max:  120rem;
+
+  --font-weight-normal: 400; /* The only serif and mono weight */
+  --font-weight-light: 300; /* 'Normal' for sans */
+  --font-weight-bold: 700; /* Sans only */
+
+  /* 
+  These are defined in layout.tsx via 'next/font/google'
+  --font-serif: 'Crimson Text';
+  --font-sans: 'Mukta'; 
+  --font-mono: 'Space Mono'; 
+  */
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  /* The old set-it-to-10px-so-I-can-calc-rems-in-my-head trick */
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.8rem;
+  line-height: 1.6;
+  font-family: var(--font-sans), sans-serif;
+  font-weight: var(--font-weight-light);
+  background: var(--c-gray-dk);
+
+  @media (min-width: 960px) {
+    font-size: 2.2rem;
+  }
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+p {
+  margin-bottom: 2.4rem;
+  line-height: 1.8;
+  text-wrap: pretty;
+
+  @media (min-width: 960px) {
+    margin-bottom: 3.6rem;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.sidenote {
+  text-transform: uppercase;
+  font-size: 1.8rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+h1,
+h2 {
+  font-family: var(--font-serif), serif;
+  font-weight: var(--font-weight-normal);
+}
+
+strong,
+b {
+  font-weight: var(--font-weight-bold);
+}
+
+h1 {
+  margin-bottom: 3rem;
+  font-size: 4.4rem;
+
+  @media (min-width: 960px) {
+    font-size: 7.2rem;
+  }
+
+  &:has(span) {
+    line-height: 1;
+    margin-top: 0.4rem;
+    margin-bottom: 3.4rem;
+
+    @media (min-width: 960px) {
+      margin-top: 0.7rem;
+      margin-bottom: 3.7rem;
+    }
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+h1 span,
+h2 {
+  font-size: 3rem;
+
+  @media (min-width: 960px) {
+    font-size: 4.8rem;
+  }
+}
+
+h2 {
+  margin-bottom: 2rem;
+
+  &:not(:first-child) {
+    margin-top: 4rem;
+  }
+}
+
+h2 span,
+h3 {
+  margin-bottom: 1.8rem;
+  font-size: 2rem;
+  line-height: 1.6;
+  font-family: var(--font-sans), sans-serif;
+  text-transform: uppercase;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.01em;
+  color: var(--c-white);
+
+  @media (min-width: 960px) {
+    font-size: 2.4rem;
+  }
+}
+
+ul {
+  list-style-type: none;
+}
+
+ul,
+li {
+  padding: 0;
+}
+
+code {
+  padding: 0 0.5rem;
+  font-family: var(--font-mono), monospace;
+  border: solid 0.1rem var(--c-gray-lt);
+  font-size: 1.6rem;
+  line-height: 1.6;
+
+  @media (min-width: 960px) {
+    font-size: 2rem;
+  }
+}
+
+pre code {
+  display: block;
+  overflow: auto;
+  margin: 3.6rem 0 6rem;
+  padding: 1.8rem;
+}

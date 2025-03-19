@@ -1,0 +1,28 @@
+.footer {
+  text-align: center;
+}
+
+.footer ul {
+  margin-bottom: 3rem;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.footer li {
+  margin-bottom: 1rem;
+}
+
+.footer a {
+  color: inherit;
+  transition: 0.3s ease all;
+
+  &:hover,
+  &:focus {
+    color: var(--c-blue);
+  }
+}
+
+.footer svg {
+  width: 2rem;
+}
