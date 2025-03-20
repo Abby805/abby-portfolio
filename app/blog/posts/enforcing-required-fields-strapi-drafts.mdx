@@ -74,14 +74,21 @@ const getEmptyRequiredFields = (event, customComponents) => {
       const fieldValue = event.params.data[fieldName];
 
       // If it returns an actual true or false it's getting it from a boolean
-      // field in Strapi which has been set by the user
+      // field in Strapi; empty fields return null
       if (typeof fieldValue === 'boolean') {
         return acc;
       }
 
-      // Some fields types have string data, others have arrays
-      // Media fields have an integer (id?) but `.length` on a number is undefined
-      if (!fieldValue || (!fieldValue.length && typeof fieldValue !== 'number')) {
+      // Check for empty strings and arrays
+      if (
+        (typeof fieldValue === 'string' || Array.isArray(fieldValue)) &&
+        !fieldValue.length
+      ) {
+        return [...acc, fieldName]
+      }
+
+      // No value
+      if (!fieldValue) {
         return [...acc, fieldName]
       }
 
