@@ -146,8 +146,7 @@ checking fields. We grab a list of all of the component or content type's fields
 (`modelSchema.attributes`), filter it to include only those that are required,
 then check to see if the required fields have data. Because different fields
 store data as different variable types, we have to run through a few different
-checks (for instance, `false` is a valid value for a boolean field, and a number
-field will return `undefined` for `.length`, etc).
+checks (for instance, `false` is a valid value for a boolean field, etc).
 
 Finally, `getEmptyRequiredFields` returns an array of the `fieldName` of any 
 fields that are empty and required. Jumping back down to the lifecycle event, we 
