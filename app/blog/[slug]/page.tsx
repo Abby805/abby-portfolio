@@ -70,7 +70,7 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export default async function Blog({ params }) {
+export default async function Blog ({ params }) {
   let blogParams = await params;
   let post = getBlogPosts().find((post) => post.slug === blogParams.slug)
 
@@ -90,6 +90,15 @@ export default async function Blog({ params }) {
       icon: <LinkedIn/>,
     },
   ]
+
+  const tags = post.metadata.tags ? 
+    ` under ${
+      post.metadata.tags.split(',')
+        .map(tag => `<strong>${tag.trim()}</strong>`)
+        .join(`, `)
+    }`
+    :
+    null;
 
   return (
     <>
@@ -127,7 +136,13 @@ export default async function Blog({ params }) {
       <Row color="blue" thin>
         <div>
           <p className={`sidenote ${blogStyles['blog_date']}`}>
-            Published on <time dateTime={post.metadata.publishedAt}>{formatDate(post.metadata.publishedAt)}</time>
+            Published on&nbsp;
+            <time dateTime={post.metadata.publishedAt}>
+              {formatDate(post.metadata.publishedAt)}
+            </time>
+            {tags && 
+              <span dangerouslySetInnerHTML={{__html: tags}} />
+            }
           </p>
         </div>
       </Row>
